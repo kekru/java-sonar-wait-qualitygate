@@ -39,11 +39,7 @@ public class SonarWaitQualityGate {
           "File does not contain '" + CE_TASK_URL_KEY + "': " + config.getWaitqualitygate().getReportTaskTxtLocation());
     }
 
-    String dashboardUrl = reportTaskContent.get(DASHBOARD_URL_KEY);
-    if (dashboardUrl != null) {
-      // sonarqube-community-branch-plugin generates wrong urls ;)
-      dashboardUrl = dashboardUrl.replace(";pullRequest", "pullRequest");
-    }
+    final String dashboardUrl = reportTaskContent.get(DASHBOARD_URL_KEY);
     LOG.info("Sonarqube Dashboard Url: " + dashboardUrl);
 
     HttpService httpService = new HttpService();
