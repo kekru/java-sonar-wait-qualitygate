@@ -39,7 +39,11 @@ public class SonarWaitQualityGate {
           "File does not contain '" + CE_TASK_URL_KEY + "': " + config.getWaitqualitygate().getReportTaskTxtLocation());
     }
 
-    final String dashboardUrl = reportTaskContent.get(DASHBOARD_URL_KEY);
+    String dashboardUrl = reportTaskContent.get(DASHBOARD_URL_KEY);
+    if (dashboardUrl != null) {
+      // sonarqube-community-branch-plugin generates wrong urls ;)
+      dashboardUrl = dashboardUrl.replace(";pullRequest", "pullRequest");
+    }
     LOG.info("Sonarqube Dashboard Url: " + dashboardUrl);
 
     HttpService httpService = new HttpService();
@@ -76,7 +80,7 @@ public class SonarWaitQualityGate {
     });
 
     if (isQualityGateSuccess) {
-      LOG.info("Quality Gate passed");
+      LOG.info("Quality Gate OK. See " + dashboardUrl);
     } else {
       final String failureMessage = "Quality Gate Failed. See " + dashboardUrl;
       LOG.info(failureMessage);
