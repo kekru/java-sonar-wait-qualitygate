@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class Config {
-  private Sonar sonar;
-  private CustomConfig waitqualitygate;
+  private Sonar sonar = new Sonar();
+  private CustomConfig waitqualitygate = new CustomConfig();
 
   @Data
   public static class Sonar {
-    private SonarHost host;
+    private SonarHost host = new SonarHost();
     private String login;
   }
 

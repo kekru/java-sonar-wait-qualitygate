@@ -11,3 +11,4 @@ generated/
 *.log
 target
 hs_err_pid*
+.factorypath
