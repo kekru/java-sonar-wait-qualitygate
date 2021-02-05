@@ -1,0 +1,1 @@
+# java-sonar-wait-qualitygate
